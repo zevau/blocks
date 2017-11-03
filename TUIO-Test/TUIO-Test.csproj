@@ -220,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FiducialController.cs" />
+    <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\TUIOConnector\OSCBundle.cs" />
     <Compile Include="Assets\TUIOConnector\OSCMessage.cs" />
     <Compile Include="Assets\TUIOConnector\OSCPacket.cs" />
