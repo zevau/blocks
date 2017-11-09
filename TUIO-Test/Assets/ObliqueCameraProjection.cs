@@ -1,21 +1,24 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObliqueCameraProjection : MonoBehaviour {
 
-    public float xOblique = 0.01f;
-    public float yOblique = -0.01f;
+    public Vector2 obliqueShift;
+
     void Start()
     {
-        SetObliqueness(xOblique, yOblique);
+        ApplyObliqueness(obliqueShift.x, obliqueShift.y);
 
     }
-    void SetObliqueness (float horizObl, float vertObl)
+    void ApplyObliqueness (float hShift, float vShift)
     {
+
         Matrix4x4 matrix = Camera.main.projectionMatrix;
-        matrix[0, 2] = horizObl;
-        matrix[1, 2] = vertObl;
+        matrix[0, 2] = hShift * 0.1f;
+        matrix[1, 2] = vShift * 0.1f;
         Camera.main.projectionMatrix = matrix;
+        //Camera correction moves the camera to neutralize the skewed projection
+        Vector3 cameraCorrection = new Vector3(hShift * transform.position.z, vShift * transform.position.z * 1/Camera.main.aspect, 0);
+        transform.position += cameraCorrection;
     }
 }
